@@ -8,6 +8,8 @@ effort="${3:-medium}"
 [ -f "$spec" ] || { echo "Spec not found: $spec"; exit 2; }
 command -v codex >/dev/null || { echo "codex CLI not on PATH"; exit 2; }
 
+git rev-parse --is-inside-work-tree >/dev/null 2>&1 || { echo "Not inside a git repository."; exit 2; }
+
 if [ -n "$(git status --porcelain)" ] && [ "${ALLOW_DIRTY:-0}" != "1" ]; then
   echo "Working tree not clean. Commit or stash first (or ALLOW_DIRTY=1)."
   exit 2
