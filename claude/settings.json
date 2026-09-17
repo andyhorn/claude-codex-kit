@@ -1,0 +1,36 @@
+{
+  "model": "opusplan",
+  "permissions": {
+    "allow": [
+      "Bash(flutter analyze:*)",
+      "Bash(flutter test:*)",
+      "Bash(flutter pub get:*)",
+      "Bash(dart format:*)",
+      "Bash(dart run build_runner:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(~/.claude/scripts/verify.sh:*)",
+      "Bash(~/.claude/skills/codex-delegate/scripts/delegate.sh:*)"
+    ],
+    "deny": [
+      "Read(**/*.g.dart)",
+      "Read(**/*.freezed.dart)",
+      "Read(**/*.gr.dart)",
+      "Read(**/build/**)",
+      "Read(**/.dart_tool/**)",
+      "Read(**/pubspec.lock)",
+      "Read(**/Pods/**)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          { "type": "command", "command": "~/.claude/hooks/format-dart.sh" }
+        ]
+      }
+    ]
+  }
+}
