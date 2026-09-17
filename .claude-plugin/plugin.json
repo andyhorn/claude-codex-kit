@@ -1,6 +1,6 @@
 {
   "name": "claude-codex-kit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Claude Pro + Codex dev kit: agents, skills, and hooks that split Flutter work between Claude (judgment) and Codex (volume implementation).",
   "author": {
     "name": "Andy Horn"

@@ -11,9 +11,21 @@ deliver (global `CLAUDE.md`, `settings.json`, and Codex's `AGENTS.md`).
 /plugin marketplace add andyhorn/claude-codex-kit
 /plugin install claude-codex-kit@claude-codex-kit
 ```
-On first session start after install, a `SessionStart` hook copies
-`codex/AGENTS.md` to `~/.codex/AGENTS.md` (idempotent — only touches it when
-the bundled copy changed).
+On first session start after install, a `SessionStart` hook merges
+`codex/AGENTS.md` into `~/.codex/AGENTS.md` inside a marked block, leaving
+any existing content above it untouched. Re-running it after an update
+replaces only that block, in place, idempotently.
+
+## Updating the plugin
+
+Claude Code caches an installed plugin by its `plugin.json` `version`, so a
+content change alone won't be picked up — bump the version:
+```
+/plugin marketplace update claude-codex-kit
+/reload-plugins
+```
+(Bump `version` in `.claude-plugin/plugin.json`, commit, and push before
+running this — without a version bump the cached copy is reused as-is.)
 
 **Manual extras** (global `CLAUDE.md`, `settings.json` model/permissions,
 and a `~/.codex/AGENTS.md` seed if you're not using the plugin yet):
