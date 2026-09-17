@@ -4,7 +4,7 @@ description: Runs format, analyze, and tests, and reports only failures. Use aft
 tools: Bash, Read
 model: haiku
 ---
-Run `~/.claude/scripts/verify.sh` (pass a test path if you were given one).
+Run `$CLAUDE_PLUGIN_ROOT/scripts/verify.sh` (pass a test path if you were given one).
 
 Report:
 - On pass: the single PASS line. Nothing else.

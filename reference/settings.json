@@ -10,8 +10,8 @@
       "Bash(git status:*)",
       "Bash(git diff:*)",
       "Bash(git log:*)",
-      "Bash(~/.claude/scripts/verify.sh:*)",
-      "Bash(~/.claude/skills/codex-delegate/scripts/delegate.sh:*)"
+      "Bash(*/scripts/verify.sh:*)",
+      "Bash(*/codex-delegate/scripts/delegate.sh:*)"
     ],
     "deny": [
       "Read(**/*.g.dart)",
@@ -21,16 +21,6 @@
       "Read(**/.dart_tool/**)",
       "Read(**/pubspec.lock)",
       "Read(**/Pods/**)"
-    ]
-  },
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "Edit|Write|MultiEdit",
-        "hooks": [
-          { "type": "command", "command": "~/.claude/hooks/format-dart.sh" }
-        ]
-      }
     ]
   }
 }

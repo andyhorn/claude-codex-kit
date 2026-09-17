@@ -12,7 +12,7 @@ description: Delegate spec'd implementation work to the Codex CLI so it uses the
 
 ## Run
 ```
-~/.claude/skills/codex-delegate/scripts/delegate.sh tasks/<feature>.md ["<chunk>"] [effort]
+$CLAUDE_PLUGIN_ROOT/skills/codex-delegate/scripts/delegate.sh tasks/<feature>.md ["<chunk>"] [effort]
 ```
 - `<chunk>`: optional, names the row in the spec's Execution table.
 - `effort`: low | medium | high. Default medium. Use high only for multi-file

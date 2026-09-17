@@ -12,7 +12,7 @@ Process:
 3. Read changed files that touch: public APIs, providers, routing, Firestore
    access, RevenueCat, theme. Skim or skip the rest.
 
-Check against `~/.claude/skills/code-review/SKILL.md`.
+Check against `$CLAUDE_PLUGIN_ROOT/skills/code-review/SKILL.md`.
 
 Output, grouped by severity (blocker / should-fix / nit), each finding as
 `file:line — issue — fix`. Maximum 15 findings. End with one line: ship,

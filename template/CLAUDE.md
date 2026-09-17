@@ -12,5 +12,5 @@ Log real tradeoffs to DECISIONS.md.
 - Codex delegation: allowed
 
 ## Commands
-- Verify: ~/.claude/scripts/verify.sh
+- Verify: use the `verifier` agent (runs the claude-codex-kit plugin's scripts/verify.sh)
 - Codegen: dart run build_runner build -d
