@@ -1,6 +1,7 @@
 # Global Codex instructions (Andy)
 
-You usually run headless, delegated from a Claude Code session, with a spec file.
+You usually run headless, delegated from a Claude Code session. Either you are
+given a spec file to implement, or you are asked to draft one.
 
 ## Rules
 - The spec is the contract. Don't expand scope. Don't touch anything listed
@@ -11,6 +12,12 @@ You usually run headless, delegated from a Claude Code session, with a spec file
 - Never commit, push, or modify CI config, Firebase project config, or signing files.
 - Finish only when `dart format lib test`, `flutter analyze`, and `flutter test`
   all pass.
+
+## When drafting a spec
+- Write no implementation code. The spec file is the only file you touch.
+- Ground every claim in the codebase. Name real paths; never invent one.
+- Never decide which model implements a chunk. Leave the Execution table empty.
+- Guess rather than leave a TODO, then report the guess so it can be checked.
 
 ## Default stack
 Flutter, Riverpod, go_router, Firebase (Firestore, Auth, Functions), RevenueCat.

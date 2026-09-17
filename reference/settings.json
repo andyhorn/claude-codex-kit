@@ -11,7 +11,8 @@
       "Bash(git diff:*)",
       "Bash(git log:*)",
       "Bash(*/scripts/verify.sh:*)",
-      "Bash(*/codex-delegate/scripts/delegate.sh:*)"
+      "Bash(*/codex-delegate/scripts/delegate.sh:*)",
+      "Bash(*/codex-delegate/scripts/draft-spec.sh:*)"
     ],
     "deny": [
       "Read(**/*.g.dart)",

@@ -13,10 +13,21 @@ list of any new tokens needed.
 **Checkpoint:** user approves the design.
 
 ## Phase 2: Spec
-Copy `references/spec-template.md` to `tasks/<feature>.md` and fill it in.
-Use the `explorer` agent to find existing patterns to follow; don't read the
-codebase yourself. Keep specs short. Public API signatures and acceptance
-criteria matter most, prose matters least.
+Codex drafts, you critique. The exploration a spec needs is the most expensive
+thing you can do in the main session, so it goes to the ChatGPT budget.
+
+1. `codex-delegate` skill, Mode 1: `draft-spec.sh <slug> "<brief>"`. The brief is
+   one or two sentences of user intent plus the approved frame names.
+2. Read the returned spec in full — it's short, and it's the one delegated
+   output you always read. Critique the `QUESTIONS` Codex reported first.
+3. Edit it yourself. Don't send it back for a second draft.
+
+Write the spec by hand only when the feature is small enough that a round trip
+costs more than the writing, or when Codex is out of quota. If you do, use the
+`explorer` agent for patterns; don't read the codebase yourself.
+
+Keep specs short. Public API signatures and acceptance criteria matter most,
+prose matters least.
 **Checkpoint:** user approves the spec. This is the cheapest place to catch
 mistakes.
 
