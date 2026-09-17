@@ -1,0 +1,13 @@
+{
+  "name": "claude-codex-kit",
+  "owner": {
+    "name": "Andy Horn"
+  },
+  "plugins": [
+    {
+      "name": "claude-codex-kit",
+      "source": "./",
+      "description": "Claude Pro + Codex dev kit: agents, skills, and hooks that split Flutter work between Claude (judgment) and Codex (volume implementation)."
+    }
+  ]
+}

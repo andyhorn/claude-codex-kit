@@ -9,7 +9,7 @@ deliver (global `CLAUDE.md`, `settings.json`, and Codex's `AGENTS.md`).
 **As a plugin** (agents, skills, hooks, and the Claude<->Codex sync):
 ```
 /plugin marketplace add andyhorn/claude-codex-kit
-/plugin install claude-codex-kit
+/plugin install claude-codex-kit@claude-codex-kit
 ```
 On first session start after install, a `SessionStart` hook copies
 `codex/AGENTS.md` to `~/.codex/AGENTS.md` (idempotent — only touches it when
