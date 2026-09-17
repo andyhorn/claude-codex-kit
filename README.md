@@ -8,7 +8,7 @@ deliver (global `CLAUDE.md`, `settings.json`, and Codex's `AGENTS.md`).
 
 **As a plugin** (agents, skills, hooks, and the Claude<->Codex sync):
 ```
-/plugin marketplace add <your-github-org>/claude-codex-kit
+/plugin marketplace add andyhorn/claude-codex-kit
 /plugin install claude-codex-kit
 ```
 On first session start after install, a `SessionStart` hook copies
