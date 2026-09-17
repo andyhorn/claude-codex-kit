@@ -27,11 +27,20 @@ content change alone won't be picked up — bump the version:
 (Bump `version` in `.claude-plugin/plugin.json`, commit, and push before
 running this — without a version bump the cached copy is reused as-is.)
 
-**Manual extras** (global `CLAUDE.md`, `settings.json` model/permissions,
-and a `~/.codex/AGENTS.md` seed if you're not using the plugin yet):
+**Manual extras** (global `CLAUDE.md`, `settings.json` permissions, and a
+`~/.codex/AGENTS.md` seed if you're not using the plugin yet):
 ```
 ./install.sh
 ```
+It never overwrites a file wholesale: `CLAUDE.md` and `AGENTS.md` are merged
+into a marked block, and `settings.json` gets its permission lists unioned in
+with `model`, `hooks`, `env`, and everything else left alone. Requires `jq`.
+
+Routing and budget rules are *not* installed this way — the plugin's
+`SessionStart` hook injects `context/budget-rules.md` every session, so they
+stay versioned with the plugin and apply to ad-hoc work, not just to
+`feature-workflow`. That includes the precedence rule that volume work goes to
+Codex before any Claude-side `builder` agent.
 
 ## Layout
 ```
@@ -42,15 +51,20 @@ agents/
   reviewer.md                 sonnet, reviews a diff against conventions
 skills/
   feature-workflow/          the end-to-end loop: design -> spec -> build -> verify -> review
-  codex-delegate/            hands spec'd work to Codex, returns a summary only
+  codex-delegate/            draft-spec.sh (Codex drafts a spec) and
+                             delegate.sh (Codex implements a chunk, summary only)
   pencil-design/             design work in Pencil via MCP
   design-to-flutter/         turns Pencil frames into widgets using theme tokens
   code-review/               review checklist + cross-model review
+context/budget-rules.md      routing + budget rules, injected every session by the hook
 hooks/
-  hooks.json                 registers format-dart.sh (PostToolUse) and sync-codex.sh (SessionStart)
+  hooks.json                 registers the PostToolUse and SessionStart hooks
   format-dart.sh              auto-formats edited .dart files
   sync-codex.sh                syncs codex/AGENTS.md -> ~/.codex/AGENTS.md
-scripts/verify.sh            format + analyze + test, token-bounded output
+  budget-rules.sh              injects context/budget-rules.md as ambient context
+scripts/
+  verify.sh                  format + analyze + test, token-bounded output
+  merge-block.sh              idempotent marked-block merge into a file you don't own
 codex/AGENTS.md              shared stack rules for Codex; synced by the plugin's SessionStart hook
 reference/
   CLAUDE.md                  global instructions; plugins can't set this, merge manually via install.sh
@@ -63,6 +77,8 @@ install.sh                   installs reference/ and codex/ (the non-plugin-deli
 | Work | Who | Budget hit |
 |---|---|---|
 | Planning, API design, final judgment | Main session (Opus in plan mode) | Claude, high |
+| Drafting a spec (codebase exploration) | Codex | ChatGPT, zero Claude |
+| Critiquing and approving that spec | Main session | Claude, low |
 | Small edits, glue, orchestration | Main session (Sonnet) | Claude, medium |
 | Search, "where is X", verify runs | Haiku subagents | Claude, low |
 | Diff review | Sonnet reviewer subagent | Claude, medium |
@@ -73,4 +89,4 @@ install.sh                   installs reference/ and codex/ (the non-plugin-deli
 - `claude` -> `/model`: confirm `opusplan` is available on your plan. If not, set `"model": "sonnet"`.
 - `codex exec --help`: confirm `--sandbox` and `--output-last-message` flags.
 - Pencil MCP tool names: the pencil skill is tool-name-agnostic on purpose. Merge in your existing Pencil skill.
-- `jq` must be installed for the format hook (`brew install jq`).
+- `jq` must be installed for the format hook and `install.sh` (`brew install jq`).
